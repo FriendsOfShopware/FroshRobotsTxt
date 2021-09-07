@@ -1,0 +1,31 @@
+{
+    "name": "frosh/robots-txt",
+    "version": "0.0.1",
+    "description": "Generate robots.txt",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Frosh\\RobotsTxt\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Frosh\\RobotsTxt\\FroshRobotsTxt",
+        "label": {
+            "de-DE": "FroshRobotsTxt",
+            "en-GB": "FroshRobotsTxt"
+        },
+        "description": {
+            "de-DE": "Erstelle robots.txt Datei",
+            "en-GB": "Create robots.txt file"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://example.com",
+            "en-GB": "https://example.com"
+        },
+        "supportLink": {
+            "de-DE": "https://example.com/support",
+            "en-GB": "https://example.com/support"
+        }
+    }
+}

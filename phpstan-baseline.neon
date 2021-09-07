@@ -1,0 +1,12 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset 1 on array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Page/Robots/RobotsPageLoader.php
+
+		-
+			message: "#^Method Frosh\\\\RobotsTxt\\\\Page\\\\Robots\\\\RobotsPageLoader\\:\\:getDomains\\(\\) should return Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Aggregate\\\\SalesChannelDomain\\\\SalesChannelDomainCollection but returns Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\EntityCollection\\.$#"
+			count: 1
+			path: src/Page/Robots/RobotsPageLoader.php
+
