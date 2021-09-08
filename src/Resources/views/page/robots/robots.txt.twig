@@ -4,13 +4,13 @@
         Allow: /
         Disallow: /*?
 
-        {%~ for basePath in page.basePaths %}
+        {% for basePath in page.basePaths %}
             Disallow: {{ basePath }}/account/
             Disallow: {{ basePath }}/checkout/
             Disallow: {{ basePath }}/widgets/
             Disallow: {{ basePath }}/navigation/
             Disallow: {{ basePath }}/bundles/
-        {% endfor ~%}
+        {% endfor %}
 
         {% for sitemap in page.sitemaps %}
             Sitemap: {{ sitemap }}
