@@ -1,20 +1,19 @@
-{% block frosh_robots_txt %}
-    {# TODO: Remove leading spaces since we are in txt format #}
-    {% apply spaceless %}
+{% block frosh_robots_txt %}{% apply remove_leading_spaces %}
+    {% block frosh_robots_txt_content %}
         User-agent: *
         Allow: /
         Disallow: /*?
 
-        {% for basePath in page.basePaths %}
+        {%~ for basePath in page.basePaths %}
             Disallow: {{ basePath }}/account/
             Disallow: {{ basePath }}/checkout/
             Disallow: {{ basePath }}/widgets/
             Disallow: {{ basePath }}/navigation/
             Disallow: {{ basePath }}/bundles/
-        {% endfor %}
+        {% endfor ~%}
 
         {% for sitemap in page.sitemaps %}
             Sitemap: {{ sitemap }}
         {% endfor %}
-    {% endapply %}
-{% endblock %}
+    {% endblock %}
+{% endapply %}{% endblock %}
