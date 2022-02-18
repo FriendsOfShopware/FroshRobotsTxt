@@ -64,7 +64,7 @@ class RobotsPageLoader
             $domainPath = explode($hostname, $domain->getUrl(), 2);
 
             // Should never happen, but you never know...
-            if (empty($domainPath[1])) {
+            if (!isset($domainPath[1])) {
                 continue;
             }
 
