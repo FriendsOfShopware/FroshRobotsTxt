@@ -38,12 +38,14 @@ class RobotsPageLoader
     {
         $page = new RobotsPage();
 
-        // TODO: Handle empty hostname?
         $hostname = $request->server->get('HTTP_HOST');
-        $domains = $this->getDomains($hostname, $context->getContext());
 
-        $page->setDomainRules($this->getDomainRules($hostname, $domains));
-        $page->setSitemaps($this->getSitemaps($domains));
+        if (is_string($hostname) && $hostname !== '') {
+            $domains = $this->getDomains($hostname, $context->getContext());
+
+            $page->setDomainRules($this->getDomainRules($hostname, $domains));
+            $page->setSitemaps($this->getSitemaps($domains));
+        }
 
         $this->eventDispatcher->dispatch(
             new RobotsPageLoadedEvent($page, $context, $request)
