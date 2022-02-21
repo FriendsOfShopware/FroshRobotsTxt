@@ -15,13 +15,9 @@
         {% endblock %}
 
         {% block frosh_robots_txt_content_disallow %}
-            {% for basePath in page.basePaths %}
-                {% for basePath in page.basePaths %}
-                    Disallow: {{ basePath }}/account/
-                    Disallow: {{ basePath }}/checkout/
-                    Disallow: {{ basePath }}/widgets/
-                    Disallow: {{ basePath }}/navigation/
-                    Disallow: {{ basePath }}/bundles/
+            {% for domainRules in page.domainRules %}
+                {% for rule in domainRules.rules %}
+                    {{ rule.type }}: {{ rule.path }}
                 {% endfor %}
             {% endfor %}
         {% endblock %}
@@ -31,7 +27,7 @@
                 {% block frosh_robots_txt_content_sitemap %}
                     Sitemap: {{ sitemap }}
                 {% endblock %}
-            {% endblock %}
-        {% endfor %}
+            {% endfor %}
+        {% endblock %}
     {% endblock %}
 {% endapply %}{% endblock %}

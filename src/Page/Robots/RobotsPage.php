@@ -2,34 +2,26 @@
 
 namespace Frosh\RobotsTxt\Page\Robots;
 
+use Frosh\RobotsTxt\Page\Robots\Struct\DomainRuleCollection;
 use Shopware\Core\Framework\Struct\Struct;
 
 class RobotsPage extends Struct
 {
-    /**
-     * @var string[]
-     */
-    protected array $basePaths;
+    protected DomainRuleCollection $domainRules;
 
     /**
      * @var string[]
      */
     protected array $sitemaps;
 
-    /**
-     * @return string[]
-     */
-    public function getBasePaths(): array
+    public function getDomainRules(): DomainRuleCollection
     {
-        return $this->basePaths;
+        return $this->domainRules;
     }
 
-    /**
-     * @param string[] $basePaths
-     */
-    public function setBasePaths(array $basePaths): void
+    public function setDomainRules(DomainRuleCollection $domainRules): void
     {
-        $this->basePaths = $basePaths;
+        $this->domainRules = $domainRules;
     }
 
     /**

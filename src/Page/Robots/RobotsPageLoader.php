@@ -2,6 +2,8 @@
 
 namespace Frosh\RobotsTxt\Page\Robots;
 
+use Frosh\RobotsTxt\Page\Robots\Struct\DomainRuleCollection;
+use Frosh\RobotsTxt\Page\Robots\Struct\DomainRuleStruct;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Exception\InconsistentCriteriaIdsException;
@@ -9,6 +11,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\ContainsFilter;
 use Shopware\Core\System\SalesChannel\Aggregate\SalesChannelDomain\SalesChannelDomainCollection;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,13 +19,16 @@ class RobotsPageLoader
 {
     private EventDispatcherInterface $eventDispatcher;
     private EntityRepositoryInterface $domainRepository;
+    private SystemConfigService $systemConfigService;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
-        EntityRepositoryInterface $domainRepository
+        EntityRepositoryInterface $domainRepository,
+        SystemConfigService $systemConfigService
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->domainRepository = $domainRepository;
+        $this->systemConfigService = $systemConfigService;
     }
 
     /**
@@ -36,7 +42,7 @@ class RobotsPageLoader
         $hostname = $request->server->get('HTTP_HOST');
         $domains = $this->getDomains($hostname, $context->getContext());
 
-        $page->setBasePaths($this->getBasePaths($hostname, $domains));
+        $page->setDomainRules($this->getDomainRules($hostname, $domains));
         $page->setSitemaps($this->getSitemaps($domains));
 
         $this->eventDispatcher->dispatch(
@@ -54,24 +60,22 @@ class RobotsPageLoader
         return $this->domainRepository->search($criteria, $context)->getEntities();
     }
 
-    /**
-     * @return string[]
-     */
-    private function getBasePaths(string $hostname, SalesChannelDomainCollection $domains): array
+    private function getDomainRules(string $hostname, SalesChannelDomainCollection $domains): DomainRuleCollection
     {
-        $basePaths = [];
+        $domainRuleCollection = new DomainRuleCollection();
         foreach ($domains as $domain) {
             $domainPath = explode($hostname, $domain->getUrl(), 2);
 
             // Should never happen, but you never know...
-            if (!isset($domainPath[1])) {
-                continue;
-            }
+            assert($domainPath && isset($domainPath[1]));
 
-            $basePaths[] = $domainPath[1];
+            $domainRuleCollection->add(new DomainRuleStruct(
+                trim($this->systemConfigService->getString('FroshRobotsTxt.config.rules', $domain->getSalesChannelId())),
+                trim($domainPath[1])
+            ));
         }
 
-        return $basePaths;
+        return $domainRuleCollection;
     }
 
     /**

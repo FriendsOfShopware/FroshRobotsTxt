@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Rules</title>
+        <title lang="de-DE">Regeln</title>
+        <input-field type="textarea">
+            <name>rules</name>
+            <label>Domain specific robots.txt Allow/Disallow rules</title>
+            <label lang="de-DE">Domain spezifische robots.txt Allow/Disallow Regeln</title>
+            <defaultValue>Disallow: /account/
+Disallow: /checkout/
+Disallow: /widgets/
+Allow: /widgets/cms/
+Allow: /widgets/menu/offcanvas</defaultValue>
+            <helpText>Rules which will be prepended by the corresponding domain path</helpText>
+            <helpText lang="de-DE">Regeln bei denen der entsprechende Domain Pfad vorangestellt wird</helpText>
+        </input-field>
+    </card>
+</config>

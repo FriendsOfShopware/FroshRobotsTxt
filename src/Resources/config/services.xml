@@ -13,6 +13,7 @@
         <service id="Frosh\RobotsTxt\Page\Robots\RobotsPageLoader">
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="sales_channel_domain.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
         </service>
 
         <!-- Controller -->
