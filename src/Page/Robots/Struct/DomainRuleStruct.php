@@ -14,8 +14,8 @@ class DomainRuleStruct extends Struct
 
     public function __construct(string $rules, string $basePath)
     {
-        $this->parseRules($rules);
         $this->basePath = $basePath;
+        $this->parseRules($rules);
     }
 
     /**
@@ -35,7 +35,8 @@ class DomainRuleStruct extends Struct
 
             assert(in_array(mb_strtolower($rule[0]), ['allow', 'disallow'], true));
             assert(isset($rule[1]));
-            $this->rules[] = ['type' => ucfirst($rule[0]), 'path' => trim($rule[1])];
+            $path = $this->basePath . '/' . ltrim(trim($rule[1]), '/');
+            $this->rules[] = ['type' => ucfirst($rule[0]), 'path' => '/' . ltrim($path, '/')];
         }
     }
 
