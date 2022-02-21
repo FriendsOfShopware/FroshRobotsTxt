@@ -16,6 +16,12 @@ class LeadingSpacesFilterExtension extends AbstractExtension
 
     public function removeLeadingSpaces(string $content): string
     {
-        return trim(preg_replace('/^ +/m', '', $content));
+        $contentStripped = preg_replace('/^ +/m', '', $content);
+
+        if ($contentStripped !== null) {
+            return trim($contentStripped);
+        }
+
+        return $content;
     }
 }

@@ -1,7 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: "#^Method Frosh\\\\RobotsTxt\\\\Page\\\\Robots\\\\RobotsPageLoader\\:\\:getDomains\\(\\) should return Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Aggregate\\\\SalesChannelDomain\\\\SalesChannelDomainCollection but returns Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\EntityCollection\\.$#"
-			count: 1
-			path: src/Page/Robots/RobotsPageLoader.php
-

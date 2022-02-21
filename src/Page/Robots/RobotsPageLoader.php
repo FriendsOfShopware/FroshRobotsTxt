@@ -59,7 +59,10 @@ class RobotsPageLoader
         $criteria = new Criteria();
         $criteria->addFilter(new ContainsFilter('url', $hostname));
 
-        return $this->domainRepository->search($criteria, $context)->getEntities();
+        $domains = $this->domainRepository->search($criteria, $context)->getEntities();
+        assert($domains instanceof SalesChannelDomainCollection);
+
+        return $domains;
     }
 
     private function getDomainRules(string $hostname, SalesChannelDomainCollection $domains): DomainRuleCollection
