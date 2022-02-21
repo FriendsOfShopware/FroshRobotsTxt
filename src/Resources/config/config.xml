@@ -6,8 +6,8 @@
         <title lang="de-DE">Regeln</title>
         <input-field type="textarea">
             <name>rules</name>
-            <label>Domain specific robots.txt Allow/Disallow rules</title>
-            <label lang="de-DE">Domain spezifische robots.txt Allow/Disallow Regeln</title>
+            <label>Domain specific robots.txt Allow/Disallow rules</label>
+            <label lang="de-DE">Domain spezifische robots.txt Allow/Disallow Regeln</label>
             <defaultValue>Disallow: /account/
 Disallow: /checkout/
 Disallow: /widgets/
