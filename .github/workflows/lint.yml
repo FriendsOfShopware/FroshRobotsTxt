@@ -1,4 +1,4 @@
-name: Run PHPStan
+name: Lint
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Clone
         uses: actions/checkout@v2
+
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
 
       - name: Run PHPStan
         uses: aragon999/phpstan-shopware-docker@master
