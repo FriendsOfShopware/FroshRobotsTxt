@@ -10,11 +10,9 @@ class DomainRuleStruct extends Struct
      * @var array<array{type: string, path: string}>
      */
     private array $rules;
-    private string $basePath;
 
-    public function __construct(string $rules, string $basePath)
+    public function __construct(string $rules, private readonly string $basePath)
     {
-        $this->basePath = $basePath;
         $this->parseRules($rules);
     }
 

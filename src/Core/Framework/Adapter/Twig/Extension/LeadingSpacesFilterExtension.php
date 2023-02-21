@@ -10,7 +10,7 @@ class LeadingSpacesFilterExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('remove_leading_spaces', [$this, 'removeLeadingSpaces'], ['is_safe' => ['all']]),
+            new TwigFilter('remove_leading_spaces', fn (string $content): string => $this->removeLeadingSpaces($content), ['is_safe' => ['all']]),
         ];
     }
 

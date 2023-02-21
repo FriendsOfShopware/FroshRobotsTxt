@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RobotsPageLoadedEvent extends PageLoadedEvent
 {
-    protected RobotsPage $page;
-
-    public function __construct(RobotsPage $page, SalesChannelContext $salesChannelContext, Request $request)
-    {
-        $this->page = $page;
+    public function __construct(
+        protected RobotsPage $page,
+        SalesChannelContext $salesChannelContext,
+        Request $request
+    ) {
         parent::__construct($salesChannelContext, $request);
     }
 
