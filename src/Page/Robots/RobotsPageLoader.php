@@ -5,7 +5,7 @@ namespace Frosh\RobotsTxt\Page\Robots;
 use Frosh\RobotsTxt\Page\Robots\Struct\DomainRuleCollection;
 use Frosh\RobotsTxt\Page\Robots\Struct\DomainRuleStruct;
 use Shopware\Core\Framework\Context;
-use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Exception\InconsistentCriteriaIdsException;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\ContainsFilter;
@@ -17,18 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RobotsPageLoader
 {
-    private EventDispatcherInterface $eventDispatcher;
-    private EntityRepositoryInterface $domainRepository;
-    private SystemConfigService $systemConfigService;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        EntityRepositoryInterface $domainRepository,
-        SystemConfigService $systemConfigService
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly EntityRepository $domainRepository,
+        private readonly SystemConfigService $systemConfigService
     ) {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->domainRepository = $domainRepository;
-        $this->systemConfigService = $systemConfigService;
     }
 
     /**
@@ -54,6 +47,9 @@ class RobotsPageLoader
         return $page;
     }
 
+    /**
+     * @param non-empty-string $hostname
+     */
     private function getDomains(string $hostname, Context $context): SalesChannelDomainCollection
     {
         $criteria = new Criteria();
@@ -65,6 +61,9 @@ class RobotsPageLoader
         return $domains;
     }
 
+    /**
+     * @param non-empty-string $hostname
+     */
     private function getDomainRules(string $hostname, SalesChannelDomainCollection $domains): DomainRuleCollection
     {
         $domainRuleCollection = new DomainRuleCollection();
@@ -72,7 +71,7 @@ class RobotsPageLoader
             $domainPath = explode($hostname, $domain->getUrl(), 2);
 
             // Should never happen, but you never know...
-            assert($domainPath && isset($domainPath[1]));
+            assert(isset($domainPath[1]));
 
             $domainRuleCollection->add(new DomainRuleStruct(
                 trim($this->systemConfigService->getString('FroshRobotsTxt.config.rules', $domain->getSalesChannelId())),

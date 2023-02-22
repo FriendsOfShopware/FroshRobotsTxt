@@ -5,13 +5,7 @@ namespace Frosh\RobotsTxt\Page\Robots\Struct;
 use Shopware\Core\Framework\Struct\Collection;
 
 /**
- * @method void add(DomainRuleStruct $domainRule)
- * @method void set(string $key, DomainRuleStruct $domainRule)
- * @method DomainRuleStruct[] getIterator()
- * @method DomainRuleStruct[] getElements()
- * @method DomainRuleStruct|null get(string $key)
- * @method DomainRuleStruct|null first()
- * @method DomainRuleStruct|null last()
+ * @extends Collection<DomainRuleStruct>
  */
 class DomainRuleCollection extends Collection
 {

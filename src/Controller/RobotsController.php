@@ -3,28 +3,20 @@
 namespace Frosh\RobotsTxt\Controller;
 
 use Frosh\RobotsTxt\Page\Robots\RobotsPageLoader;
-use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @RouteScope(scopes={"storefront"})
- */
+#[Route(defaults: ['_routeScope' => ['storefront']])]
 class RobotsController extends StorefrontController
 {
-    private RobotsPageLoader $robotsPageLoader;
-
-    public function __construct(RobotsPageLoader $robotsPageLoader)
+    public function __construct(private readonly RobotsPageLoader $robotsPageLoader)
     {
-        $this->robotsPageLoader = $robotsPageLoader;
     }
 
-    /**
-     * @Route("/robots.txt", name="frontend.robots.txt", methods={"GET"}, defaults={"_format"="txt"})
-     */
+    #[Route(path: '/robots.txt', name: 'frontend.robots.txt', methods: ['GET'], defaults: ['_format' => 'txt'])]
     public function robotsTxt(SalesChannelContext $context, Request $request): Response
     {
         $page = $this->robotsPageLoader->load($request, $context);
