@@ -9,6 +9,9 @@
             "Frosh\\RobotsTxt\\": "src/"
         }
     },
+    "require": {
+        "shopware/core": "~6.5.0 || ~6.6.0"
+    },
     "extra": {
         "shopware-plugin-class": "Frosh\\RobotsTxt\\FroshRobotsTxt",
         "label": {

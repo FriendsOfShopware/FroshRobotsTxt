@@ -7,7 +7,7 @@ use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(defaults: ['_routeScope' => ['storefront']])]
 class RobotsController extends StorefrontController
@@ -16,7 +16,7 @@ class RobotsController extends StorefrontController
     {
     }
 
-    #[Route(path: '/robots.txt', name: 'frontend.robots.txt', methods: ['GET'], defaults: ['_format' => 'txt'])]
+    #[Route(path: '/robots.txt', name: 'frontend.robots.txt', defaults: ['_format' => 'txt'], methods: ['GET'])]
     public function robotsTxt(SalesChannelContext $context, Request $request): Response
     {
         $page = $this->robotsPageLoader->load($request, $context);

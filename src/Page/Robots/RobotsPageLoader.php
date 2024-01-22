@@ -17,9 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RobotsPageLoader
 {
+    /**
+     * @param EntityRepository<SalesChannelDomainCollection> $salesChannelDomainRepository
+     */
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly EntityRepository $domainRepository,
+        private readonly EntityRepository $salesChannelDomainRepository,
         private readonly SystemConfigService $systemConfigService
     ) {
     }
@@ -55,7 +58,7 @@ class RobotsPageLoader
         $criteria = new Criteria();
         $criteria->addFilter(new ContainsFilter('url', $hostname));
 
-        $domains = $this->domainRepository->search($criteria, $context)->getEntities();
+        $domains = $this->salesChannelDomainRepository->search($criteria, $context)->getEntities();
         assert($domains instanceof SalesChannelDomainCollection);
 
         return $domains;

@@ -3,28 +3,9 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <services>
-        <!-- Core\Content\Framework\Adapter\Twig\Extension -->
-        <service id="Frosh\RobotsTxt\Core\Framework\Adapter\Twig\Extension\LeadingSpacesFilterExtension" >
-            <tag name="twig.extension"/>
-        </service>
-
-        <!-- PageLoader -->
-        <service id="Frosh\RobotsTxt\Page\Robots\RobotsPageLoader">
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="sales_channel_domain.repository"/>
-            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
-        </service>
-
-        <!-- Controller -->
-        <service id="Frosh\RobotsTxt\Controller\RobotsController" public="true">
-            <argument type="service" id="Frosh\RobotsTxt\Page\Robots\RobotsPageLoader"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setTwig">
-                <argument type="service" id="twig"/>
-            </call>
-        </service>
+        <defaults autowire="true" autoconfigure="true" />
+        <prototype namespace="Frosh\RobotsTxt\" resource="../../" exclude="../../{Resources,FroshRobotsTxt.php}" />
     </services>
 </container>
