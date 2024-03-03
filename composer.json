@@ -23,12 +23,12 @@
             "en-GB": "Create robots.txt file"
         },
         "manufacturerLink": {
-            "de-DE": "https://example.com",
-            "en-GB": "https://example.com"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshRobotsTxt",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshRobotsTxt"
         },
         "supportLink": {
-            "de-DE": "https://example.com/support",
-            "en-GB": "https://example.com/support"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshRobotsTxt/issues",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshRobotsTxt/issues"
         }
     }
 }
