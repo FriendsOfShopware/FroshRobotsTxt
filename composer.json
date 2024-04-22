@@ -1,6 +1,5 @@
 {
     "name": "frosh/robots-txt",
-    "version": "0.1.0",
     "description": "Generate robots.txt",
     "type": "shopware-platform-plugin",
     "license": "MIT",
