@@ -8,9 +8,12 @@
             "Frosh\\RobotsTxt\\": "src/"
         }
     },
-    "require": {
-        "shopware/core": "~6.5.0 || ~6.6.0"
-    },
+    "authors": [
+        {
+            "name": "FriendsOfShopware",
+            "homepage": "https://friendsofshopware.com"
+        }
+    ],
     "extra": {
         "shopware-plugin-class": "Frosh\\RobotsTxt\\FroshRobotsTxt",
         "label": {
@@ -29,5 +32,8 @@
             "de-DE": "https://github.com/FriendsOfShopware/FroshRobotsTxt/issues",
             "en-GB": "https://github.com/FriendsOfShopware/FroshRobotsTxt/issues"
         }
+    },
+    "require": {
+        "shopware/core": "~6.5.0 || ~6.6.0"
     }
 }
