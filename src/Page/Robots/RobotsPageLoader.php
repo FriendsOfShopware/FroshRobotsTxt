@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Frosh\RobotsTxt\Page\Robots;
 
@@ -36,7 +38,7 @@ class RobotsPageLoader
 
         $hostname = $request->server->get('HTTP_HOST');
 
-        if (is_string($hostname) && $hostname !== '') {
+        if (is_string($hostname) && '' !== $hostname) {
             $domains = $this->getDomains($hostname, $context->getContext());
 
             $page->setDomainRules($this->getDomainRules($hostname, $domains));
@@ -70,15 +72,23 @@ class RobotsPageLoader
     private function getDomainRules(string $hostname, SalesChannelDomainCollection $domains): DomainRuleCollection
     {
         $domainRuleCollection = new DomainRuleCollection();
+
+        $seenDomainHostnames = [];
         foreach ($domains as $domain) {
             $domainPath = explode($hostname, $domain->getUrl(), 2);
 
             // Should never happen, but you never know...
             assert(isset($domainPath[1]));
 
+            $domainHostname = trim($domainPath[1]);
+            if (in_array($domainHostname, $seenDomainHostnames, true)) {
+                continue;
+            }
+
+            $seenDomainHostnames[] = $domainHostname;
             $domainRuleCollection->add(new DomainRuleStruct(
                 trim($this->systemConfigService->getString('FroshRobotsTxt.config.rules', $domain->getSalesChannelId())),
-                trim($domainPath[1])
+                $domainHostname
             ));
         }
 
@@ -93,7 +103,7 @@ class RobotsPageLoader
         $sitemaps = [];
 
         foreach ($domains as $domain) {
-            $sitemaps[] = $domain->getUrl() . '/sitemap.xml';
+            $sitemaps[] = $domain->getUrl().'/sitemap.xml';
         }
 
         return $sitemaps;
