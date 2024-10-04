@@ -70,15 +70,23 @@ class RobotsPageLoader
     private function getDomainRules(string $hostname, SalesChannelDomainCollection $domains): DomainRuleCollection
     {
         $domainRuleCollection = new DomainRuleCollection();
+
+        $seenDomainHostnames = [];
         foreach ($domains as $domain) {
             $domainPath = explode($hostname, $domain->getUrl(), 2);
 
             // Should never happen, but you never know...
             assert(isset($domainPath[1]));
 
+            $domainHostname = trim($domainPath[1]);
+            if (in_array($domainHostname, $seenDomainHostnames, true)) {
+                continue;
+            }
+
+            $seenDomainHostnames[] = $domainHostname;
             $domainRuleCollection->add(new DomainRuleStruct(
                 trim($this->systemConfigService->getString('FroshRobotsTxt.config.rules', $domain->getSalesChannelId())),
-                trim($domainPath[1])
+                $domainHostname
             ));
         }
 
