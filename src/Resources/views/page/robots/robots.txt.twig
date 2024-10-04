@@ -12,6 +12,9 @@
 
             {# Allow all theme files to be indexed, including the GET requests with the cache buster #}
             Allow: /*theme/
+
+            {# Allow all media files to be indexed, including the GET requests with the cache buster #}
+            Allow: /media/*?ts=
         {% endblock %}
 
         {% block frosh_robots_txt_content_disallow %}
