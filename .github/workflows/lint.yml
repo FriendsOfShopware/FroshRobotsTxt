@@ -15,6 +15,6 @@ jobs:
         uses: docker://oskarstark/php-cs-fixer-ga
 
       - name: phpstan
-        uses: docker://aragon999/phpstan-shopware:v6.5.0
+        uses: docker://aragon999/phpstan-shopware:v6.5.8
         with:
           args: analyse .
