@@ -11,7 +11,7 @@ class RobotsPageLoadedEvent extends PageLoadedEvent
     public function __construct(
         protected RobotsPage $page,
         SalesChannelContext $salesChannelContext,
-        Request $request
+        Request $request,
     ) {
         parent::__construct($salesChannelContext, $request);
     }

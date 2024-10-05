@@ -23,7 +23,7 @@ class RobotsPageLoader
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly EntityRepository $salesChannelDomainRepository,
-        private readonly SystemConfigService $systemConfigService
+        private readonly SystemConfigService $systemConfigService,
     ) {
     }
 
