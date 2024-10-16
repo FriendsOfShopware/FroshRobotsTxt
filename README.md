@@ -11,6 +11,7 @@ Currently there exist the following default rules
 Allow: /
 Disallow: /*?
 Allow: /*theme/
+Allow: /media/*?ts=
 ```
 If you need to modify them this should be done by a template modification. If there are other general rules which are useful for others, consider creating a pull request.
 
