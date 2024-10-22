@@ -36,11 +36,15 @@ class DomainRuleStruct extends Struct
         foreach ($rules as $rule) {
             $rule = explode(':', $rule, 2);
 
-            assert(in_array(mb_strtolower($rule[0]), ['allow', 'disallow'], true));
-            assert(isset($rule[1]));
-            $path = $this->basePath . '/' . ltrim(trim($rule[1]), '/');
-            $this->rules[] = ['type' => ucfirst($rule[0]), 'path' => '/' . ltrim($path, '/')];
-        }
+            $ruleType = mb_strtolower($rule[0] ?? '');
+            $path = trim($rule[1] ?? '');
 
+            if (!in_array($ruleType, ['allow', 'disallow'], true) || $path === '') {
+                continue;
+            }
+
+            $path = $this->basePath . '/' . ltrim($path, '/');
+            $this->rules[] = ['type' => ucfirst($ruleType), 'path' => '/' . ltrim($path, '/')];
+        }
     }
 }
