@@ -58,10 +58,7 @@ class RobotsPageLoader
         $criteria = new Criteria();
         $criteria->addFilter(new ContainsFilter('url', $hostname));
 
-        $domains = $this->salesChannelDomainRepository->search($criteria, $context)->getEntities();
-        assert($domains instanceof SalesChannelDomainCollection);
-
-        return $domains;
+        return $this->salesChannelDomainRepository->search($criteria, $context)->getEntities();
     }
 
     /**
