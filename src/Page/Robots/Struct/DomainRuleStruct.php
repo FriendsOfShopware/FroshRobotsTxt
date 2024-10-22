@@ -24,7 +24,12 @@ class DomainRuleStruct extends Struct
         return $this->rules;
     }
 
-    public function parseRules(string $rules): void
+    public function getBasePath(): string
+    {
+        return $this->basePath;
+    }
+
+    private function parseRules(string $rules): void
     {
         $rules = explode("\n", $rules);
 
@@ -36,10 +41,6 @@ class DomainRuleStruct extends Struct
             $path = $this->basePath . '/' . ltrim(trim($rule[1]), '/');
             $this->rules[] = ['type' => ucfirst($rule[0]), 'path' => '/' . ltrim($path, '/')];
         }
-    }
 
-    public function getBasePath(): string
-    {
-        return $this->basePath;
     }
 }
