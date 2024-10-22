@@ -76,11 +76,13 @@ class RobotsPageLoader
             assert(isset($domainPath[1]));
 
             $domainHostname = trim($domainPath[1]);
-            if (in_array($domainHostname, $seenDomainHostnames, true)) {
+            // Skip hostnames which are available with http and https
+            if (isset($seenDomainHostnames[$domainHostname])) {
                 continue;
             }
 
-            $seenDomainHostnames[] = $domainHostname;
+            $seenDomainHostnames[$domainHostname] = true;
+
             $domainRuleCollection->add(new DomainRuleStruct(
                 trim($this->systemConfigService->getString('FroshRobotsTxt.config.rules', $domain->getSalesChannelId())),
                 $domainHostname
