@@ -71,11 +71,8 @@ class RobotsPageLoader
         $seenDomainHostnames = [];
         foreach ($domains as $domain) {
             $domainPath = explode($hostname, $domain->getUrl(), 2);
+            $domainHostname = trim($domainPath[1] ?? '');
 
-            // Should never happen, but you never know...
-            assert(isset($domainPath[1]));
-
-            $domainHostname = trim($domainPath[1]);
             // Skip hostnames which are available with http and https
             if (isset($seenDomainHostnames[$domainHostname])) {
                 continue;
